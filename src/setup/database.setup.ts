@@ -30,10 +30,14 @@ export const databaseSetup = async (): Promise<void> => {
 
   // Adding admin user when the database setup
   const userRepository = AppDataSource.getRepository(UserEntity);
+  const admin = await userRepository.findOne({
+    where: {
+      name: process.env.ADMIN_NAME, // Check for the username
+      role: "admin",
+    },
+  });
 
-  const userCount: number = await userRepository.count();
-
-  if (userCount === 0) {
+  if (admin === undefined || admin == null) {
     const adminHashedPassword = await bcrypt.hash(
       process.env.ADMIN_PASSWORD,
       10
@@ -46,7 +50,5 @@ export const databaseSetup = async (): Promise<void> => {
     };
     console.log(JSON.stringify(adminUser));
     authService.createUser(adminUser);
-  } else {
-    console.log("user count: " + userCount);
   }
 };
