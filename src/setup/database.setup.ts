@@ -44,7 +44,9 @@ export const databaseSetup = async (): Promise<void> => {
       hashedPassword: adminHashedPassword,
       role: "admin",
     };
-
+    console.log(JSON.stringify(adminUser));
     authService.createUser(adminUser);
+  } else {
+    console.log("user count: " + userCount);
   }
 };
