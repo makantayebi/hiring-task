@@ -33,11 +33,11 @@ A mini task management system for the project.
 
 - [x] Make a rough list of Components: A logout button, A login page, A sign up page, A list of texts with eval, a list of feedbacks, a button to add feedback, and finally a navigation bar (includes logout/login/signup, About page, feedback/text list pages.)
 
-* [ ] import bootstrap
-* [ ] Navbar
-* [ ] About page
-* [ ] Login page
-* [ ] Sign up page
+* [x] import bootstrap
+* [x] Navbar
+* [x] About page
+* [x] Login page
+* [x] Sign up page
 * [ ] List of user's texts
 * [ ] Upload new text
 
