@@ -8,7 +8,18 @@ The customer wants to get better insights into how their customers think about t
 
 ## API-Testing
 
-- For the signup: `curl...`
+- For the signup:
+
+```
+curl -X POST http://localhost:8000/api/auth/signup \
+-H "Content-Type: application/json" \
+-d '{"name":"user1", "password":"testmaster3000"}'
+```
+
+- For the sign in:
+  curl -X POST http://localhost:8000/api/auth/signin \
+  -H "Content-Type: application/json" \
+  -d '{"name":"user1", "password":"testmaster3000"}'
 
 ## Requirements
 

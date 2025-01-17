@@ -9,9 +9,9 @@ import { errorHandlerWrapper } from "@/utils";
 
 const signUpHandler = async (req: Request, res: Response) => {
   const { name, password, role } = req.body;
-
+  console.log("user name: " + name);
   const hashedPassword = await bcrypt.hash(password, 10);
-
+  console.log("hashedPass: " + hashedPassword);
   const newUser = await authService.createUser({
     name,
     hashedPassword,
@@ -51,5 +51,20 @@ const signInHandler = async (req: Request, res: Response) => {
   });
 };
 
+// const userGetter = async (req: Request) => {
+//   const token = req.headers.authorization;
+//   if (!token) {
+//     return null;
+//   }
+
+//   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+//     if (err) {
+//       return null;
+//     }
+//     return user;
+//   });
+//   return false;
+// };
+// export const getUser = errorHandlerWrapper(userGetter);
 export const signUp = errorHandlerWrapper(signUpHandler);
 export const signIn = errorHandlerWrapper(signInHandler);
