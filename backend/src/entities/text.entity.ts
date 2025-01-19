@@ -19,11 +19,11 @@ export class TextEntity extends CoreEntity {
   text: string;
 
   @Column("user_id")
-  userId: string; // <----------------- ┒
-  //                                    |
-  // Foreign key                        |
-  @ManyToOne(() => UserEntity) //       | Some pleasing ascii diagram.
-  @JoinColumn({ name: "userId" }) // ---┛ If you find this easter egg: chckout my favorite mystery: https://www.youtube.com/watch?v=I2O7blSSzpI
+  userId: string;
+
+  // Foreign key
+  @ManyToOne(() => UserEntity)
+  @JoinColumn({ name: "userId" })
   user: UserEntity;
 
   @Column({

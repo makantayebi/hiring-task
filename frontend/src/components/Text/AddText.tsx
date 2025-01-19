@@ -11,7 +11,7 @@ const AddText = () => {
       setError("Text cannot exceed 1000 characters.");
     } else {
       try {
-        const response = await fetch("http://localhost:8000/api/analyze", {
+        const response = await fetch("http://localhost:8000/api/text/analyze", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
