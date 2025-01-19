@@ -28,7 +28,7 @@ const signUpHandler = async (req: Request, res: Response) => {
 const signInHandler = async (req: Request, res: Response) => {
   const { name, password } = req.body;
 
-  const user = await authService.getUserFromName({ name });
+  const user = await authService.getUserFromName(name);
 
   if (!user) {
     res.status(409).json({ meesaage: "User not found" });

@@ -25,7 +25,9 @@ export const createUser = async ({
   return await userRepository.save(newUser);
 };
 
-export const getUserFromName = async ({ name }): Promise<UserEntity | null> => {
+export const getUserFromName = async (
+  name: string
+): Promise<UserEntity | null> => {
   const userRepository = AppDataSource.getRepository(UserEntity);
 
   const gettingUser: UserEntity | null = await userRepository.findOne({
@@ -38,6 +40,6 @@ export const getUserFromName = async ({ name }): Promise<UserEntity | null> => {
 export const getUserFromReq = async (req: Request): Promise<UserEntity> => {
   const token = req.header("Authorization").replace("Bearer ", "");
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
-  const user = getUserFromName(decoded);
+  const user = getUserFromName(decoded.username);
   return user;
 };

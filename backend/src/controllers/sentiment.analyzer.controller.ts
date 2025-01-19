@@ -4,8 +4,6 @@ import { authService } from "@/services";
 import { createText, evaluateText } from "@/services/text.service";
 import { TextEntity } from "@/entities/text.entity";
 const sentimentAnalyzer = async (req: Request, res: Response) => {
-  console.log("let the analysis begin");
-  console.debug("text is: " + req.body.text);
   const text = req.body.text;
   const userEntity = await authService.getUserFromReq(req);
   const userId = userEntity.uuid;
