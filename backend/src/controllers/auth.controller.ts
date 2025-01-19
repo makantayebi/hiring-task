@@ -28,7 +28,7 @@ const signUpHandler = async (req: Request, res: Response) => {
 const signInHandler = async (req: Request, res: Response) => {
   const { name, password } = req.body;
 
-  const user = await authService.getUser({ name });
+  const user = await authService.getUserFromName({ name });
 
   if (!user) {
     res.status(409).json({ meesaage: "User not found" });
@@ -51,20 +51,5 @@ const signInHandler = async (req: Request, res: Response) => {
   });
 };
 
-// const userGetter = async (req: Request) => {
-//   const token = req.headers.authorization;
-//   if (!token) {
-//     return null;
-//   }
-
-//   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-//     if (err) {
-//       return null;
-//     }
-//     return user;
-//   });
-//   return false;
-// };
-// export const getUser = errorHandlerWrapper(userGetter);
 export const signUp = errorHandlerWrapper(signUpHandler);
 export const signIn = errorHandlerWrapper(signInHandler);

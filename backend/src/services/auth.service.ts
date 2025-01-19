@@ -3,6 +3,8 @@
 import { UserEntity } from "@/entities";
 import { AppDataSource } from "@/setup/datasource";
 import { CreateUserRequestType } from "@/types";
+import { Request } from "express";
+import jwt from "jsonwebtoken";
 
 export const createUser = async ({
   name,
@@ -23,7 +25,7 @@ export const createUser = async ({
   return await userRepository.save(newUser);
 };
 
-export const getUser = async ({ name }): Promise<UserEntity | null> => {
+export const getUserFromName = async ({ name }): Promise<UserEntity | null> => {
   const userRepository = AppDataSource.getRepository(UserEntity);
 
   const gettingUser: UserEntity | null = await userRepository.findOne({
@@ -31,4 +33,11 @@ export const getUser = async ({ name }): Promise<UserEntity | null> => {
   });
   if (gettingUser) return gettingUser;
   return null;
+};
+
+export const getUserFromReq = async (req: Request): Promise<UserEntity> => {
+  const token = req.header("Authorization").replace("Bearer ", "");
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const user = getUserFromName(decoded);
+  return user;
 };

@@ -11,19 +11,38 @@ const Navbar: React.FC = () => {
                 About
               </a>
             </li>
+            {!(
+              localStorage.getItem("username") &&
+              localStorage.getItem("jwtToken")
+            ) ? (
+              <li className="nav-item">
+                <a href="/signup" className="nav-link">
+                  Signup
+                </a>
+              </li>
+            ) : (
+              ""
+            )}
             <li className="nav-item">
-              <a href="/signup" className="nav-link">
-                Signup
+              {localStorage.getItem("username") &&
+              localStorage.getItem("jwtToken") ? (
+                <span className="nav-link">
+                  Hello {localStorage.getItem("username")}
+                </span>
+              ) : (
+                <a href="/login" className="nav-link">
+                  Login
+                </a>
+              )}
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" aria-disabled="true" href="/newText">
+                Add Text
               </a>
             </li>
             <li className="nav-item">
-              <a href="/login" className="nav-link">
-                Login
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link disabled" aria-disabled="true">
-                Disabled
+              <a className="nav-link" aria-disabled="true" href="/texts/all">
+                My texts
               </a>
             </li>
           </ul>

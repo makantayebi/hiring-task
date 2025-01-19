@@ -5,22 +5,38 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSignup = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO :  functionality here.
-    // Simple validation
     if (!username || !password) {
       setError("Both fields are required.");
       return;
     }
+    try {
+      const name = username;
+      const response = await fetch("http://localhost:8000/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
 
+        body: JSON.stringify({ name, password }), // Malpractice: do not send password unhashed in the real world.
+      });
+
+      if (!response.ok) {
+        setError("Authentication failed.");
+        return;
+      }
+    } catch (err) {
+      setError("Authentication failed.");
+      return;
+    }
     console.log("signed up in with:", { username, password });
     setError("");
     alert("Signup successful!");
   };
 
   return (
-    <div className="login-container mt-5">
+    <div className="login-container mt-5g">
       <h2>Signup</h2>
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSignup} className="login-form">

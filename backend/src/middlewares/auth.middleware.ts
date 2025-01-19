@@ -19,7 +19,7 @@ export const authMiddleware = (
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = authService.getUser(decoded);
+    const user = authService.getUserFromName(decoded);
 
     if (!user) throw "User Not Found!";
     next();

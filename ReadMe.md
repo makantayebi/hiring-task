@@ -6,7 +6,7 @@ This is a sentiment analysis application that allows users to analyze the sentim
 Your (imagined) customer has developed a new product that they are selling on their e-commerce website.
 The customer wants to get better insights into how their customers think about their product, so they are asking you to implement a Proof of Concept for a customer feedback form with sentiment analysis.
 
-## API-Testing
+## DEV
 
 - For the signup:
 
@@ -17,9 +17,21 @@ curl -X POST http://localhost:8000/api/auth/signup \
 ```
 
 - For the sign in:
+
+```
   curl -X POST http://localhost:8000/api/auth/signin \
   -H "Content-Type: application/json" \
   -d '{"name":"user1", "password":"testmaster3000"}'
+```
+
+- For the sentiment analysis:
+
+```
+  curl -X POST http://localhost:8000/api/analyze -H
+  -H "Content-Type: application/json" \
+  Authorization: Bearer {jwtToken} \
+  body: JSON.stringify({text})
+```
 
 ## Requirements
 
