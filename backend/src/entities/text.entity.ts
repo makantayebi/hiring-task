@@ -15,7 +15,7 @@ export class TextEntity extends CoreEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: "text" })
+  @Column({ name: "text", length: 1000 })
   text: string;
 
   @Column("user_id")
