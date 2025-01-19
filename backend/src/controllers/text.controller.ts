@@ -16,18 +16,14 @@ const sentimentAnalyzer = async (req: Request, res: Response) => {
   res.status(201).json({ message: "Success" });
 };
 
-const allTextsOfUser = async (
-  req: Request,
-  res: Response
-): Promise<TextEntity[]> => {
+const allTextsOfUser = async (req: Request, res: Response) => {
   const userEntity = await authService.getUserFromReq(req);
   const textRepository = AppDataSource.getRepository(TextEntity);
   try {
     const texts = await textRepository.find({
       where: { user: { uuid: userEntity.uuid } },
     });
-
-    return texts;
+    res.status(201).json(texts);
   } catch (error) {
     console.error("Error fetching rows:", error);
     throw error;

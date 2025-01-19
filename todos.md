@@ -23,11 +23,11 @@ A mini task management system for the project.
       - give feedback to the evaluation of a text.
       - Admin can see the list of evaluations that have a feedback, with the feedback.
 
-- [ ] Create table for `texts`: id:number, content: char(1000), userid: number, optional evaluation?: short number
+- [x] Create table for `texts`: id:number, content: char(1000), userid: number, optional evaluation?: short number
 - [ ] Create table of `feedback`: FK, text_id, content: char(140)
 - [ ] Create a Post route for sending feedback
-- [ ] Create a Get route for am admin to get all feedbacks
-- [ ] Create a Get route for a user to see all their texts
+- [ ] Create a post route for am admin to get all feedbacks
+- [x] Create a post route for a user to see all their texts
 
 **The frontend**:
 
@@ -38,8 +38,8 @@ A mini task management system for the project.
 * [x] About page
 * [x] Login page
 * [x] Sign up page
-* [ ] List of user's texts
-* [ ] Upload new text
+* [x] List of user's texts
+* [x] Upload new text
 
 **The Sentiment Analysis Tool**
 

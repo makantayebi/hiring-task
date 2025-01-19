@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" aria-disabled="true" href="/texts/all">
+              <a className="nav-link" aria-disabled="true" href="/texts">
                 My texts
               </a>
             </li>
