@@ -13,7 +13,7 @@ A mini task management system for the project.
       The components are not there, so it needs to be designed.
       Initiate a react frontend first.
 - [x] Setup postgres
-
+- [x] Connect the backend to an actual sentiment-analysis-tool
 - [x] Make a usecase scenario list: Scenarios are:
 
       - user sign up
@@ -26,7 +26,7 @@ A mini task management system for the project.
 - [x] Create table for `texts`: id:number, content: char(1000), userid: number, optional evaluation?: short number
 - [ ] Create table of `feedback`: FK, text_id, content: char(140)
 - [ ] Create a Post route for sending feedback
-- [ ] Create a post route for am admin to get all feedbacks
+- [ ] Create a post route for an admin to get all feedbacks
 - [x] Create a post route for a user to see all their texts
 
 **The frontend**:
@@ -43,9 +43,9 @@ A mini task management system for the project.
 
 **The Sentiment Analysis Tool**
 
-- [ ] I don't have a proper GPU; Is it possible to use a free online service?
-- [ ] Probe the hugging face. Does it offer free llm APIs for sent. analysis?
-- [ ] Apply the Good/Bad/Neutral categories.
+- [x] I don't have a proper GPU; Is it possible to use a free online service? YES, but local installation is working alright.
+- [x] Probe the hugging face. Does it offer free llm APIs for sent. analysis? Their _transformers_ library is Ok-ish.
+- [x] Apply the Good/Bad/Neutral categories.
 
 ## Prio 2 Important
 

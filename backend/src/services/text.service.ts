@@ -14,7 +14,9 @@ export const createText = async ({
   return await textRepo.save(newText);
 };
 
-export const evaluateText = async (text: TextEntity): Promise<boolean> => {
+export const storeTextEvaluation = async (
+  text: TextEntity
+): Promise<boolean> => {
   const textRepo = AppDataSource.getRepository(TextEntity);
   await textRepo.update(text.id, { sentiment: text.sentiment });
   return true;
