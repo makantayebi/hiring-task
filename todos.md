@@ -24,9 +24,9 @@ A mini task management system for the project.
       - Admin can see the list of evaluations that have a feedback, with the feedback.
 
 - [x] Create table for `texts`: id:number, content: char(1000), userid: number, optional evaluation?: short number
-- [ ] Create table of `feedback`: FK, text_id, content: char(140)
-- [ ] Create a Post route for sending feedback
-- [ ] Create a post route for an admin to get all feedbacks
+- [x] Create table of `feedback`: FK, text_id, content: char(140)
+- [x] Create a Post route for sending feedback
+- [x] Create a post route for an admin to get all feedbacks
 - [x] Create a post route for a user to see all their texts
 
 **The frontend**:
@@ -50,9 +50,13 @@ A mini task management system for the project.
 ## Prio 2 Important
 
 - [ ] Levelled logging based on environment?
+- [ ] remove hardcoded url
 
 ## Prio 3 Nice to have
 
+- [ ] Apply unified bootstrap.
+- [ ] Hash or salt the password before uploading over the network.
+- [ ] Https with certs (certbot...)
 - [ ] Integrate with blockchain as connecting with metamask using web3.js.
 - [ ] Deploy your solution to the cloud.
 - [ ] Implement engineering best practices (source control, CI/CD, infrastructure-as-a-code)

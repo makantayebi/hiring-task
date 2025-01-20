@@ -1,4 +1,5 @@
 import React from "react";
+import { isAdmin, isLoggedIn, logout } from "../../utils/SessionManagement";
 
 const Navbar: React.FC = () => {
   return (
@@ -11,40 +12,56 @@ const Navbar: React.FC = () => {
                 About
               </a>
             </li>
-            {!(
-              localStorage.getItem("username") &&
-              localStorage.getItem("jwtToken")
-            ) ? (
-              <li className="nav-item">
-                <a href="/signup" className="nav-link">
-                  Signup
-                </a>
-              </li>
+            {isLoggedIn() ? (
+              <>
+                <li className="nav-item">
+                  <span className="nav-link">
+                    Hello {localStorage.getItem("username")}!
+                  </span>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" aria-disabled="true" href="/newText">
+                    Add Rating
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" aria-disabled="true" href="/texts">
+                    My Ratings
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    href="/login"
+                    className="nav-link"
+                    onClick={() => logout()}
+                  >
+                    Logout
+                  </a>
+                </li>
+              </>
             ) : (
-              ""
+              <>
+                <li className="nav-item">
+                  <a href="/login" className="nav-link">
+                    Login
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="/signup" className="nav-link">
+                    Signup
+                  </a>
+                </li>
+              </>
             )}
-            <li className="nav-item">
-              {localStorage.getItem("username") &&
-              localStorage.getItem("jwtToken") ? (
-                <span className="nav-link">
-                  Hello {localStorage.getItem("username")}
-                </span>
-              ) : (
-                <a href="/login" className="nav-link">
-                  Login
-                </a>
-              )}
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" aria-disabled="true" href="/newText">
-                Add Text
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" aria-disabled="true" href="/texts">
-                My texts
-              </a>
-            </li>
+            {isAdmin() && (
+              <>
+                <li className="nav-item">
+                  <a href="/feedbacks" className="nav-link">
+                    See Feedbacks (Admins only)
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

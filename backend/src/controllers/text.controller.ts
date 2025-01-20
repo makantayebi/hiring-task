@@ -10,10 +10,6 @@ const sentimentAnalyzer = async (req: Request, res: Response) => {
   const userId = userEntity.uuid;
   const textEntity: TextEntity = await createText({ text, userId });
   fetchEvaluation(textEntity);
-  // TODO: Get the real sentiment..
-  // textEntity.sentiment = "Good";
-
-  // storeTextEvaluation(textEntity);
   res.status(201).json({ message: "Success" });
 };
 interface EvalEngineResponse {
@@ -22,7 +18,7 @@ interface EvalEngineResponse {
   confidence: number;
 }
 
-// Make the call to the eval-engine async.
+// Decoupling: Make the call to the eval-engine async.
 function fetchEvaluation(textEntity: TextEntity) {
   console.debug("fetching evaluation for text: " + textEntity.text);
   var text = textEntity.text;
@@ -42,7 +38,7 @@ function fetchEvaluation(textEntity: TextEntity) {
     .then((data) => {
       const evaluation = data as EvalEngineResponse;
       textEntity.sentiment = evaluation.sentiment;
-      // Once the sentiment is fetched
+      // Once the sentiment is fetched, update in db.
       storeTextEvaluation(textEntity);
     })
     .catch((error) => {

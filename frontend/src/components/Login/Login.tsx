@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { login } from "../../utils/SessionManagement";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -22,21 +24,22 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, password }), // Malpractice: do not send password unhashed in the real world.
+        body: JSON.stringify({ name, password }), // Malpractice: I haven't hashed before sending. should change.
       });
-
       if (!response.ok) {
         setError("Authentication failed.");
         return;
       }
-      // Extract JWT
-      const data = await response.json();
-      localStorage.setItem("jwtToken", data.token);
-      localStorage.setItem("username", username);
 
+      // Extract JWT, and user role.
+      const data = await response.json();
+
+      login(username, data.token, data.isAdmin);
+      // Redirect to "/newText"
+      window.location.href = "/newText";
       console.log("Logged in with:", { username, password });
-      alert("Login successful!");
     } catch (err) {
+      console.error(JSON.stringify(err));
       setError("Authentication failed.");
     }
   };

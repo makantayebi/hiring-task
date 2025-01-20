@@ -50,12 +50,12 @@ const TextList: React.FC = () => {
   const handleFeedbackSubmit = async (textId: number) => {
     const feedback = feedbacks[textId];
     if (!feedback) {
-      alert("Please enter feedback before submitting.");
+      setError("Please enter feedback before submitting.");
       return;
     }
 
     try {
-      const response = await fetch(`/api/feedback/new`, {
+      const response = await fetch(`http://localhost:8000/api/feedback/new`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,10 +68,10 @@ const TextList: React.FC = () => {
         throw new Error("Failed to submit feedback");
       }
 
-      alert("Feedback submitted successfully!");
       setFeedbacks((prev) => ({ ...prev, [textId]: "" })); // Clear feedback field
     } catch (err) {
-      alert("Error");
+      console.log(JSON.stringify(err));
+      setError("err");
     }
   };
 

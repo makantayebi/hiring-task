@@ -31,37 +31,40 @@ const AddText = () => {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>
-          <input
-            type="text"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            maxLength={1000}
-            placeholder="Enter your text..."
-          />
-        </label>
-      </div>
-      <div>
-        <button
-          type="submit"
-          style={{
-            marginTop: "10px",
-            padding: "10px 20px",
-            fontSize: "16px",
-            backgroundColor: "#007bff",
-            color: "#fff",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
-        >
-          Add
-        </button>
-      </div>
-      {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
-    </form>
+    <>
+      <p className="fs-1 mt-5">Sample product</p>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>
+            <input
+              type="text"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              maxLength={1000}
+              placeholder="Enter your text..."
+            />
+          </label>
+        </div>
+        <div>
+          <button
+            type="submit"
+            style={{
+              marginTop: "10px",
+              padding: "10px 20px",
+              fontSize: "16px",
+              backgroundColor: "#007bff",
+              color: "#fff",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+          >
+            Add rating
+          </button>
+        </div>
+        {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
+      </form>
+    </>
   );
 };
 export default AddText;
