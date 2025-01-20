@@ -11,15 +11,14 @@ import {
   routeMiddleware,
 } from "@/middlewares";
 
+const app: Express = express();
 export const backendSetup = () => {
-  const app: Express = express();
-
   app.use(cors());
   app.use(express.json());
   app.use(clientUse());
   app.use(routeMiddleware);
   app.use("/health", (_req: Request, res: Response) => {
-    res.send("It's healthy!");
+    res.status(200).json({ message: "healthy!" });
   }); //health check
 
   app.use("/api", router);
@@ -32,3 +31,4 @@ export const backendSetup = () => {
     Logger.info(`Sever is running on ${port}`);
   });
 };
+export default app;
