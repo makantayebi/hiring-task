@@ -39,11 +39,6 @@ const Navbar: React.FC = () => {
       <div className="container-fluid">
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <a href="/" className="nav-link">
-                About
-              </a>
-            </li>
             {isLoggedIn() ? (
               <>
                 <li className="nav-item">
@@ -98,6 +93,11 @@ const Navbar: React.FC = () => {
                 {ethBalance !== null
                   ? " " + ethBalance + " ETH"
                   : " Not fetched"}
+              </a>
+            </li>
+            <li className="nav-item">
+              <a href="/" className="nav-link">
+                About
               </a>
             </li>
           </ul>

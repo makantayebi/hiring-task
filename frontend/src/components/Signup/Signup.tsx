@@ -36,8 +36,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="login-container mt-5g">
-      <h2>Signup</h2>
+    <div className="login-container">
+      <h1 className="mb-4 mt-5">Signup</h1>
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSignup} className="login-form">
         <div className="input-group mb-3">

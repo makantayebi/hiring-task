@@ -4,7 +4,7 @@ const About = () => {
       {/* <p className="fs-1">
         <br></br>
       </p> */}
-      <p className="fs-1 mt-5">Welcome to the sentiment analysis app</p>
+      <h1 className="mt-5 mb-4">Welcome to the sentiment analysis app</h1>
       <p className="text-start">
         Get a sentiment analysis for your texts. This is a BlockBlackHole
         project.

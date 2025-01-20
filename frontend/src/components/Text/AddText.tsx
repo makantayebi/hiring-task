@@ -32,7 +32,7 @@ const AddText = () => {
   };
   return (
     <>
-      <p className="fs-1 mt-5">Sample product</p>
+      <h1 className="mt-5 mb-4">Sample product</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>
@@ -46,23 +46,11 @@ const AddText = () => {
           </label>
         </div>
         <div>
-          <button
-            type="submit"
-            style={{
-              marginTop: "10px",
-              padding: "10px 20px",
-              fontSize: "16px",
-              backgroundColor: "#007bff",
-              color: "#fff",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
+          <button type="submit" className="btn btn-primary mt-1">
             Add rating
           </button>
         </div>
-        {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
+        {error && <p className="alert alert-danger">{error}</p>}
       </form>
     </>
   );

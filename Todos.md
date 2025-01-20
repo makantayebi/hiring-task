@@ -50,7 +50,7 @@ A mini task management system for the project.
 ## Prio 2 Important
 
 - [ ] remove hardcoded url
-- [ ] Apply unified bootstrap.
+- [x] Apply unified bootstrap.
 
 ## Prio 3 Nice to have
 

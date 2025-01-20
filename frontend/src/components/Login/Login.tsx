@@ -45,8 +45,8 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container mt-5">
-      <h2>Login</h2>
+    <div className="login-container">
+      <h1 className="mt-5 mb-4">Login</h1>
       <form onSubmit={handleLogin} className="login-form">
         <div className="input-group mb-3">
           {/* <label htmlFor="username">Username:</label> */}

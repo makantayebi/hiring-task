@@ -81,8 +81,8 @@ const TextList: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Texts List</h1>
+    <div className="mt-5">
+      <h1 className="mb-4">My Ratings</h1>
 
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
@@ -91,22 +91,24 @@ const TextList: React.FC = () => {
 
       <ul>
         {texts.map((text) => (
-          <li key={text.id} style={{ marginBottom: "20px" }}>
-            <div>
-              <strong>{text.text}</strong> ({text.sentiment})
-            </div>
-            <textarea
-              rows={3}
-              placeholder="Write your feedback here..."
+          <li key={text.id} className="list-group-item mb-5">
+            <span>
+              <strong>{text.text}</strong>
+              <br></br>
+              Sentiment: ({text.sentiment})
+            </span>
+            <input
+              className="form-control"
+              maxLength={144}
+              placeholder="What do you think about the calculated sentiment?"
               value={feedbacks[text.id] || ""}
               onChange={(e) => handleFeedbackChange(text.id, e.target.value)}
-              style={{ width: "100%", marginTop: "5px" }}
             />
             <button
               onClick={() => handleFeedbackSubmit(text.id)}
-              style={{ marginTop: "5px" }}
+              className="btn btn-primary mt-2"
             >
-              Upload Feedback
+              Send Feedback
             </button>
           </li>
         ))}

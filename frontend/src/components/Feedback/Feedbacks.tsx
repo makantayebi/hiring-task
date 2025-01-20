@@ -43,23 +43,30 @@ const FeedbackList: React.FC = () => {
 
   return (
     <div>
-      <h1>All Feedbacks</h1>
+      <h1 className="mt-5 mb-4">All Feedbacks</h1>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
       {!loading && !error && feedbacks.length === 0 && (
         <p>No Feedbacks found.</p>
       )}
-      <ul>
-        {feedbacks.map((feedback) => (
-          <li key={feedback.id}>
-            <span>user feedback: {feedback.content}</span>
-            <br></br>
-            <span>original text: {feedback.originalText}</span>
-            <br></br>
-            <span>Sentiment: {feedback.sentiment}</span>
-          </li>
-        ))}
-      </ul>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">Original Rating</th>
+            <th scope="col">Sentiment</th>
+            <th scope="col">User Feedback</th>
+          </tr>
+        </thead>
+        <tbody>
+          {feedbacks.map((feedback) => (
+            <tr>
+              <td>{feedback.originalText}</td>
+              <td>{feedback.sentiment}</td>
+              <td>{feedback.content}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
