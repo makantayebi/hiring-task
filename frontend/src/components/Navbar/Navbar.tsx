@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
             <li className="nav-item">
               <a className="nav-link">
                 Wallet:
-                {ethBalance !== null
+                {ethBalance !== null && ethBalance !== undefined
                   ? " " + ethBalance + " ETH"
                   : " Not fetched"}
               </a>

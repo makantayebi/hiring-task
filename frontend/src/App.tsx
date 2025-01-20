@@ -1,6 +1,3 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import About from "./components/About/About";
 import Navbar from "./components/Navbar/Navbar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -11,8 +8,6 @@ import TextList from "./components/Text/Texts";
 import FeedbackList from "./components/Feedback/Feedbacks";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <Navbar></Navbar>
