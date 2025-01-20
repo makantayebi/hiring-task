@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
         console.log("balance is: " + balance);
         return balance;
       } catch (error) {
-        console.error("User denied account access:", error);
+        console.log("User denied Metamask access.");
       }
     } else {
       console.error("MetaMask is not installed.");
@@ -97,7 +97,7 @@ const Navbar: React.FC = () => {
                 Wallet:
                 {ethBalance !== null
                   ? " " + ethBalance + " ETH"
-                  : "Not fetched"}
+                  : " Not fetched"}
               </a>
             </li>
           </ul>
