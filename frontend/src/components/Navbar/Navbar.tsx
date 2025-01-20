@@ -94,8 +94,9 @@ const Navbar: React.FC = () => {
             )}
             <li className="nav-item">
               <a className="nav-link">
+                Wallet:
                 {ethBalance !== null
-                  ? "ETH Balance: " + ethBalance
+                  ? " " + ethBalance + " ETH"
                   : "Not fetched"}
               </a>
             </li>

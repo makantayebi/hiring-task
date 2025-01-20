@@ -49,12 +49,11 @@ A mini task management system for the project.
 
 ## Prio 2 Important
 
-- [ ] Levelled logging based on environment?
 - [ ] remove hardcoded url
+- [ ] Apply unified bootstrap.
 
 ## Prio 3 Nice to have
 
-- [ ] Apply unified bootstrap.
 - [ ] Hash or salt the password before uploading over the network.
 - [ ] Https with certs (certbot...)
 - [x] Integrate with blockchain as connecting with metamask using web3.js.
@@ -62,3 +61,4 @@ A mini task management system for the project.
 - [ ] Implement engineering best practices (source control, CI/CD, infrastructure-as-a-code)
 - [x] Commit to the master branch
 - [ ] Benchmark and choose CI/CD tool set (Docker, Kubernetes, cloud platforms) on (Jenkins, GitHub Actions, gitlab,..)
+- [ ] Levelled logging based on environment?
