@@ -2,20 +2,9 @@
 
 ## Description
 
-This is a sentiment analysis application that allows users to analyze the sentiment of a given text. A product is rated by the customer, the sentiment analysis system assigns a sentiment category (Good, Bad, Neutral) to the rating. User can give feedback about the sentiment, and admin(s) can see a list of all the feedbacks.
-
-## Components
-
-- Frontend: Frontend is developed in react. React components use the Restful API of the backend to fetch their data and authentication. Framework is React and language is Typescript.
-- Backend: The initially named "backend" serves Restful APIs for authentication, adding ratings and feedbacks and showing their list. Framework is Express and language is Typescript.
-- Analyze-engine is software implemented in Python that uses the open-source `transformers` library of Huggin-face to categorize the sentiment of a given sentence. This software provides Restful API to receive texts and return rates.
-
-## Run
-
-Currently three softwares need to be set up separately:
-
-- fronent: `cd ./frontend`, then `npm run build`, `npm run preview`
-- backend: `cd ./backend`, then `npm run dev`
+This is a sentiment analysis application that allows users to analyze the sentiment of a given text.
+Your (imagined) customer has developed a new product that they are selling on their e-commerce website.
+The customer wants to get better insights into how their customers think about their product, so they are asking you to implement a Proof of Concept for a customer feedback form with sentiment analysis.
 
 ## DEV
 
