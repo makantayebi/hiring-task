@@ -1,7 +1,39 @@
-import React from "react";
 import { isAdmin, isLoggedIn, logout } from "../../utils/SessionManagement";
+import Web3 from "web3";
+import React, { useEffect, useState } from "react";
 
 const Navbar: React.FC = () => {
+  const [ethBalance, setEthBalance] = useState<bigint | null>();
+  useEffect(() => {
+    const loadData = async () => {
+      const balance = await getEthBalance();
+      setEthBalance(balance);
+    };
+
+    loadData();
+  }, []);
+  const getEthBalance = async (): Promise<bigint | null> => {
+    if (typeof window.ethereum !== "undefined") {
+      const web3 = new Web3(window.ethereum);
+      try {
+        // Request account access
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+
+        console.log("Connected account:", accounts[0]);
+        const walletAddress = accounts[0];
+        const balance = await web3.eth.getBalance(walletAddress as string);
+        console.log("balance is: " + balance);
+        return balance;
+      } catch (error) {
+        console.error("User denied account access:", error);
+      }
+    } else {
+      console.error("MetaMask is not installed.");
+    }
+    return null;
+  };
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -54,19 +86,23 @@ const Navbar: React.FC = () => {
               </>
             )}
             {isAdmin() && (
-              <>
-                <li className="nav-item">
-                  <a href="/feedbacks" className="nav-link">
-                    See Feedbacks (Admins only)
-                  </a>
-                </li>
-              </>
+              <li className="nav-item">
+                <a href="/feedbacks" className="nav-link">
+                  See Feedbacks (Admins only)
+                </a>
+              </li>
             )}
+            <li className="nav-item">
+              <a className="nav-link">
+                {ethBalance !== null
+                  ? "ETH Balance: " + ethBalance
+                  : "Not fetched"}
+              </a>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
   );
 };
-
 export default Navbar;

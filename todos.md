@@ -57,7 +57,7 @@ A mini task management system for the project.
 - [ ] Apply unified bootstrap.
 - [ ] Hash or salt the password before uploading over the network.
 - [ ] Https with certs (certbot...)
-- [ ] Integrate with blockchain as connecting with metamask using web3.js.
+- [x] Integrate with blockchain as connecting with metamask using web3.js.
 - [ ] Deploy your solution to the cloud.
 - [ ] Implement engineering best practices (source control, CI/CD, infrastructure-as-a-code)
 - [x] Commit to the master branch
