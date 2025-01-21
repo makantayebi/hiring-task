@@ -1,87 +1,68 @@
-# Home Assignment: Sentiment Analysis Application
+# Sentiment Analysis Application
 
-## Description
+This is a sentiment analysis application that allows users to analyze the sentiment of a given text.
+A product is rated by the customer, the sentiment analysis system assigns a sentiment to the rating.
+User can give feedback about the sentiment, and admin(s) can all feedbacks.
 
-This is a sentiment analysis application that allows users to analyze the sentiment of a given text. A product is rated by the customer, the sentiment analysis system assigns a sentiment category (Good, Bad, Neutral) to the rating. User can give feedback about the sentiment, and admin(s) can see a list of all the feedbacks.
+The frontend employs the Metamask extension via web3 to display the balance on the ETH wallet.
 
 ## Components
 
-- Frontend: Frontend is developed in react. React components use the Restful API of the backend to fetch their data and authentication. Framework is React and language is Typescript.
-- Backend: The initially named "backend" serves Restful APIs for authentication, adding ratings and feedbacks and showing their list. Framework is Express and language is Typescript.
-- Analyze-engine is software implemented in Python that uses the open-source `transformers` library of Huggin-face to categorize the sentiment of a given sentence. This software provides Restful API to receive texts and return rates.
+- **Frontend** is developed in react. React components use the restful API of the _backend_ to fetch their data and authentication. Framework is React and language is Typescript.
+- **Backend**: serves restful APIs for authentication, storing ratings and feedbacks and showing their list. Framework is Express and language is Typescript. Renaming of 'backend' is to be considered, since there is a third component as follows:
+- **Analyze-engine** is a module implemented in Python that uses the open-source `transformers` library of Huggin-face to categorize the sentiment of a given sentence. This module provides restful API to receive texts and return sentiments.
 
 ## Run
 
-Currently three softwares need to be set up separately:
+Currently three modules need to be set up separately:
 
-- fronent: `cd ./frontend`, then `npm run build`, `npm run preview`
-- backend: `cd ./backend`, then `npm run dev`
+1. **Analyze-engine**: Make sure the python dependencies are installed. `cd ./analyze-engine`, then `python3 app.py`. Restful API will be provided over localhost:8001
+2. **Backend**: `cd ./backend`, then `npm run dev`. The backend will provide restful API over the localhost:8000 (details further below)
+3. **Frontent**: `cd ./frontend`, then `npm run build`, `npm run preview`: to enable `http://localhost:4173/`
 
-## DEV
+## Data model
 
-- For the signup:
+- `human`: representing users who sign in.
+  - `uuid`: unique string user ID
+  - `name` is the username
+  - `hashed_password`,
+  - `role`: A string with either `admin` or `user`
+- `text`: This stores the ratings that users are able to add. Columns:
+  - `id`,
+  - `text`,
+  - `userId`: the `uuid` of the user that issued the rating.
+  - `sentiment`: Enum that has four values: `Undefined`, `Good`, `Bad`, `Neutral`. Default is `Undefined`, until the analyze-engine evaluation is received.
+- `Feedback`: Users' feedback about the sentiment of their rating. -`id` integer primary key
+  - `content`: The text of the feedback,
+  - `textId`: Foreign key to the rating that this feedback concerns. `Feedback` and `text` have a one-to-one relationship.
 
-```
-curl -X POST http://localhost:8000/api/auth/signup \
--H "Content-Type: application/json" \
--d '{"name":"user1", "password":"testmaster3000"}'
-```
+## Restful APIs
 
-- For the sign in:
+### Backend APIs:
 
-```
-  curl -X POST http://localhost:8000/api/auth/signin \
-  -H "Content-Type: application/json" \
-  -d '{"name":"user1", "password":"testmaster3000"}'
-```
+- To signup: `POST` to `api/auth/signup` `body`: `{ name: string, password: string }`. To become an admin, sys-admins have to engage manually.
+- To login: `POST` to `api/auth/signin` with `body`: `{ name: string, password: string }`. Response is: `{token : string, isAdmin: string}`. Token is the jwt token to be saved locally in the browser. `isAdmin` is either `true` or `false`.
+- Putting a new feedback for a sentiment: `POST` to `api/feedback/new`, with the jwt token in header. Send the `{textId: number, feedback:string}` in the body. Possible previous feedbacks will be overwritten.
+- Listing feedback: `POST` `api/feedback/all` with the jwtToken. Response is a list of `Feedback` objects such as following: `Feedback {  id: number;content: string;originalText: string;sentiment: string;}`
+- To add a text: `POST` to `api/text/analyze` with the jwtToken in the header, and the text in the body.
+- To list texts of a user: `POST` to `api/text/all` with the `jwtToken` in the header. Response is an array of prototype Text: `Text {id: number,text: string,sentiment: string}`
 
-- For the sentiment analysis:
+### Sentiment Analysis API:
 
-```
-  curl -X POST http://localhost:8000/api/analyze -H
-  -H "Content-Type: application/json" \
-  Authorization: Bearer {jwtToken} \
-  body: JSON.stringify({text})
-```
+- Have the sentiment for a text calculated: `Post` to `localhost:8001/analyze`, with `{text:string}`. Response is: `{text: string,sentiment: string,confidence: number}`
 
-## Requirements
+## Testing
 
-- Implement a REST API, which takes text (up to 1000 characters) as input, calculates a sentiment of the text, and stores the results in a database.
+- The backend has been fitted with the `jest` library and one sample test, that checks for the `healthy` signal, to demonstrate the ability of smoketesting. The `app` object in `backend.setup.ts` is exported now to be testable.
 
-- Implement a REST API, which returns saved customer text messages together with calculated sentiments.
+## Next steps:
 
-- Implement a frontend application with a feedback form for the end customer and that displays existing feedback with sentiment to ADMIN users.
+Features that could not arrive soon enough:
 
-- Tech stacks:
-  - **Frontend:** React or Nextjs, tailwindcss or chakraUI
-  - **Backend:** Nodejs, express, PostgreSQL
-
-## Instructions
-
-- Design, implement, and test your solution.
-
-- Prepare a short, concise document (no presentation slides, 2 pages max) describing your solution (design, architecture, database structure if applicable).
-
-- Send us the document and your implementation in a ZIP file (please, exclude binaries and dependencies)
-
-- Your assignment is complete when you have a working solution that you can show to your customer.
-
-## Advice/Hints
-
-- Since we already provide project backend infrastructure that contains user authentication and authorization, you should keep our codebase style and structure for this project.
-
-- Consider using existing libraries or cloud services for calculating sentiment.
-
-- Think of sentiment as simple classification (Good/Bad/Neutral).
-
-- Target for simplicity. Don't overcommit to the task, we value your personal time.
-
-- If you have any questions, don't hesitate to ask.
-
-- If you manage to complete the task very fast, here are a couple of bonus tasks:
-
-  - Integrate with blockchain as connecting with metamask using web3.js.
-
-  - Deploy your solution to the cloud.
-
-  - Implement engineering best practices (source control, CI/CD, infrastructure-as-a-code)
+- Expand testing to cover enough of the code, and log better.
+- Use https, and hash the passwords on frontend before sending over the network.
+- Dockerization: 3 docker containers for the 3 modules. Don't forget logging configurations.
+- Benchmarking Docker Compose, Kubernetes and rivals, and making a decision there for the orchestration of dockers.
+- Benchmarking and selection of a cloud service, then using Terraform or a similar tool to configure for the IaC.
+- Benchmark the deployment tools based on the need, and make a decision (Github Actions, Gitlab, Jenkins)
+- Add products and implement functionality to use the Metamask for purchasing them!
